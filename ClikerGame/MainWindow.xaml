@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
+
         xmlns:local="clr-namespace:ClikerGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800">
+        Title="CookieClicker" Height="550" Width="800" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -59,7 +59,11 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Image Source="Images\perfectCookie.png" Width="215" Height="215" />
+                            <Image Source="Images\perfectCookie.png" Width="215" Height="215">
+                                <Image.Effect>
+                                    <DropShadowEffect ShadowDepth="4" Direction="180" Color="Black" Opacity="0.5" BlurRadius="4"/>
+                                </Image.Effect>
+                            </Image>
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
@@ -112,60 +116,28 @@
                 </Grid.RowDefinitions>
                 <!--#region Кнопки магазина-->
                 <Grid Grid.Row="0">
-                    <Label Content="Улучшение 1" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Label Content="Улучшение 2" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Label Content="Улучшение 3" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <Label Content="Улучшение 4" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="4">
-                    <Label Content="Улучшение 5" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="5">
-                    <Label Content="Улучшение 6" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="6">
-                    <Label Content="Улучшение 7" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <Grid Grid.Row="7">
-                    <Label Content="Улучшение 8" VerticalAlignment="Center" FontSize="24" Foreground="White" FontFamily="Franklin Gothic Medium" Margin="0,-20,0,0"/>
-                    <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="40" Margin="0,-5,0,0" FontFamily="Impact"/>
-                    <Image Source="Images\perfectCookie.png" HorizontalAlignment="Left" Width="18" Margin="4,20,0,0"/>
-                    <Label Content="123" VerticalAlignment="Bottom" Margin="20,0,0,0" FontSize="17" Foreground="LawnGreen" FontFamily="Calibri"/>
-                    <Button Background="#00000000" Opacity="0.15"/>
+                    <local:ButtonShop/>
                 </Grid>
                 <!--#endregion-->
             </Grid>
