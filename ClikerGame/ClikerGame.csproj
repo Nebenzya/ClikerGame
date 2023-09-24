@@ -8,9 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\bgBlue.jpg" />
+    <None Remove="Images\darkNoise.jpg" />
+    <None Remove="Images\darkNoiseTopBar.jpg" />
+    <None Remove="Images\panelHorizontal.png" />
+    <None Remove="Images\panelVertical.png" />
+    <None Remove="Images\perfectCookie.png" />
+    <None Remove="Images\storeTile.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Logic\" />
     <Folder Include="View\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\bgBlue.jpg" />
+    <Resource Include="Images\darkNoise.jpg" />
+    <Resource Include="Images\darkNoiseTopBar.jpg" />
+    <Resource Include="Images\panelHorizontal.png" />
+    <Resource Include="Images\panelVertical.png" />
+    <Resource Include="Images\perfectCookie.png" />
+    <Resource Include="Images\storeTile.jpg" />
   </ItemGroup>
 
 </Project>
