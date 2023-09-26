@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+
     <None Remove="Images\bgBlue.jpg" />
     <None Remove="Images\darkNoise.jpg" />
     <None Remove="Images\darkNoiseTopBar.jpg" />
@@ -24,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <Resource Include="Images\bgBlue.jpg" />
     <Resource Include="Images\darkNoise.jpg" />
     <Resource Include="Images\darkNoiseTopBar.jpg" />
