@@ -3,10 +3,205 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
         xmlns:local="clr-namespace:ClikerGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CookieClicker" Height="550" Width="800" ResizeMode="CanMinimize">
     <Grid>
-       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <!--#region Магазин и главная кнопка-->
+        <Grid Grid.RowSpan="4" Grid.ColumnSpan="4">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\bgBlue.jpg"/>
+            </Grid.Background>
+            <!--#region кнопка печенька-->
+            <Button Width="230" Height="230" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,9,-90">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <!-- Триггер для события IsPressed (нажатие на кнопку) -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" To="210" Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" To="210" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Width" To="230" Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetProperty="Height" To="230" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Image Source="Images\perfectCookie.png" Width="215" Height="215">
+                                <Image.Effect>
+                                    <DropShadowEffect ShadowDepth="4" Direction="180" Color="Black" Opacity="0.5" BlurRadius="4"/>
+                                </Image.Effect>
+                            </Image>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+        <Label Content="0" HorizontalAlignment="Center" Margin="50" VerticalAlignment="Top" Grid.Column="3" Grid.Row="3" FontSize="25" Foreground="White" />
+        <!--#endregion-->
+        <Grid Grid.Row="3" Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="6.5*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images\darkNoiseTopBar.jpg"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images\storeTile.jpg"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images\storeTile.jpg"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="155*"/>
+                    <ColumnDefinition Width="99*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images\panelHorizontal.png"/>
+                </Grid.Background>
+            </Grid>
+            <Label Content="Магазин" Foreground="White" HorizontalContentAlignment="Center" FontSize="26" VerticalAlignment="Top" Margin="0,-6,0,0" FontFamily="Constantia"/>
+            <Grid Grid.Row="2" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--#region Кнопки магазина-->
+                <Grid Grid.Row="0">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <local:ButtonShop/>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <local:ButtonShop/>
+                </Grid>
+                <!--#endregion-->
+            </Grid>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Рамка-->
+        <Grid Grid.Row="1" Grid.RowSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelVertical.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="4" Grid.Row="3" Grid.RowSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelVertical.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="3" Grid.RowSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelVertical.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="6" Grid.Row="1" Grid.RowSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelVertical.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.ColumnSpan="7">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelHorizontal.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.ColumnSpan="7" Grid.Row="4">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelHorizontal.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.ColumnSpan="7" Grid.Row="2">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\panelHorizontal.png"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\darkNoise.jpg" Opacity="0.5"/>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Label Content="Здесь должна быть &#x0a;информация o улучшении&#x0a;при наведении на кнопку." Foreground="White" FontSize="19"/>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Меню-->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.ColumnSpan="3">
+                <Image Source="Images\darkNoiseTopBar.jpg" Stretch="Fill"/>
+            </Grid>
+            <Button Margin="4"/>
+            <Button Grid.Column="1" Margin="4"/>
+            <Button Grid.Column="2" Margin="4"/>
+        </Grid>
+        <!--#endregion-->
     </Grid>
 </Window>
