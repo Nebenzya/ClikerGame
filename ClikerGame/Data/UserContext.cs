@@ -19,6 +19,12 @@ namespace ClikerGame.Data
                   modelBuilder.Entity<User>().ToTable(t => t.HasCheckConstraint("Nickname", "Nickname <> ''"));
                   modelBuilder.Entity<Modifier>().Property(d => d.Name).IsRequired();
                   modelBuilder.Entity<Modifier>().ToTable(nameof(Modifier)).HasCheckConstraint("Name", "Name <> ''");
+                  modelBuilder.Entity<User>().HasMany(c => c.Modifiers).WithMany(s => s.Users).UsingEntity<UserModifier>(j => j.HasOne(pt => pt.Modifier).WithMany(p => p.UserModifiers).HasForeignKey(pt => pt.ModifiersId), j => j.HasOne(pt => pt.User).WithMany(t => t.UserModifiers).HasForeignKey(pt => pt.UsersId), j =>
+                  {
+                        j.Property(pt => pt.QuantityOfModifiers).HasDefaultValue(0);
+                        j.HasKey(t => new { t.UsersId, t.ModifiersId });
+                        j.ToTable("UserModifier");
+                  });
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
