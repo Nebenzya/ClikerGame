@@ -16,8 +16,17 @@ namespace ClikerGame.Data
                   public string Nickname { get; set; }
                   public int Score { get; set; }
                   public int Time { get; set; }
-
-                  //public List<Game> Games { get; set; }
+                  public int QuantityOfModifiers { get; set; }
+                  public List<Modifier> Modifiers { get; set; } = new List<Modifier>();
+            }
+            public class Modifier
+            {
+                  [Key]
+                  public int Id { get; set; }
+                  public string? Name { get; set; }
+                  public int Price { get; set; }
+                  public int Modificator { get; set; }
+                  public List<User> Gamers { get; set; } = new List<User>();
             }
       }
 }

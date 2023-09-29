@@ -12,10 +12,13 @@ namespace ClikerGame.Data
       public class UserContext : DbContext
       {
             public DbSet<User> Users { get; set; }
+            public DbSet<Modifier> Modifiers { get; set; }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                   modelBuilder.Entity<User>().Property(d => d.Nickname).IsRequired();
                   modelBuilder.Entity<User>().ToTable(t => t.HasCheckConstraint("Nickname", "Nickname <> ''"));
+                  modelBuilder.Entity<Modifier>().Property(d => d.Name).IsRequired();
+                  modelBuilder.Entity<Modifier>().ToTable(nameof(Modifier)).HasCheckConstraint("Name", "Name <> ''");
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
