@@ -20,6 +20,8 @@ namespace ClikerGame
     /// </summary>
     public partial class ButtonShop : UserControl
     {
+        public int modif { get; }
+        public int cost { get; }
         public ButtonShop()
         {
             InitializeComponent();
