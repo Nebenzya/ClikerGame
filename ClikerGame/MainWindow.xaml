@@ -7,6 +7,32 @@
         xmlns:local="clr-namespace:ClikerGame"
         mc:Ignorable="d"
         Title="CookieClicker" Height="550" Width="800" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="HoverButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" Value="Gray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -30,7 +56,7 @@
                 <ImageBrush ImageSource="Images\bgBlue.jpg"/>
             </Grid.Background>
             <!--#region кнопка печенька-->
-            <Button Width="230" Height="230" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,9,-90">
+            <Button Width="230" Height="230" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,9,-90" Click="cookie_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
@@ -69,7 +95,7 @@
                 </Button.Template>
             </Button>
         </Grid>
-        <Label Content="0" HorizontalAlignment="Center" Margin="50" VerticalAlignment="Top" Grid.Column="3" Grid.Row="3" FontSize="25" Foreground="White" />
+        <Label Content="0" HorizontalAlignment="Center" Margin="50" VerticalAlignment="Top" Grid.Column="3" Grid.Row="3" FontSize="25" Foreground="White" x:Name="cookie_counter"/>
         <!--#endregion-->
         <Grid Grid.Row="3" Grid.Column="5">
             <Grid.RowDefinitions>
@@ -103,44 +129,7 @@
                 </Grid.Background>
             </Grid>
             <Label Content="Магазин" Foreground="White" HorizontalContentAlignment="Center" FontSize="26" VerticalAlignment="Top" Margin="0,-6,0,0" FontFamily="Constantia"/>
-            <Grid Grid.Row="2" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <!--#region Кнопки магазина-->
-                <Grid Grid.Row="0">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="4">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="5">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="6">
-                    <local:ButtonShop/>
-                </Grid>
-                <Grid Grid.Row="7">
-                    <local:ButtonShop/>
-                </Grid>
-                <!--#endregion-->
-            </Grid>
+            <StackPanel Grid.Row="2" Grid.RowSpan="2"  x:Name="shopStack" Height="400"/>
         </Grid>
         <!--#endregion-->
         <!--#region Рамка-->
@@ -191,16 +180,18 @@
         <!--#region Меню-->
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.ColumnSpan="3">
+            <Grid Grid.ColumnSpan="4">
                 <Image Source="Images\darkNoiseTopBar.jpg" Stretch="Fill"/>
             </Grid>
-            <Button Margin="4"/>
-            <Button Grid.Column="1" Margin="4"/>
-            <Button Grid.Column="2" Margin="4"/>
+            <Button Margin="4,4,2,4"/>
+            <Button Grid.Column="1" Margin="2,4,2,4"/>
+            <Button Grid.Column="2" Margin="2,4,2,4" Content="Пауза" Style="{StaticResource HoverButtonStyle}"/>
+            <Button Grid.Column="3" Margin="2,4,4,4" Content="Породолжить" Style="{StaticResource HoverButtonStyle}"/>
         </Grid>
         <!--#endregion-->
     </Grid>
