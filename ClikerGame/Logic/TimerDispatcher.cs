@@ -1,36 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Threading;
 
 namespace ClikerGame.Logic
 {
     internal class TimerDispatcher
     {
-        public int sec, min, hour;//сек, мин, час
-        public System.Timers.Timer timer;
+        private readonly DispatcherTimer timer;
+        private readonly ClickDispatcher _clickDispatcher;
 
-        public void GameTime()//Подсчет времени игры
+        public TimerDispatcher(ClickDispatcher clickDispatcher)
         {
-            timer = new System.Timers.Timer();
-            timer.Interval = 1000;
-            timer.Elapsed += GameTimeEvent;
+            timer = new() { Interval = TimeSpan.FromSeconds(1) };
+            timer.Tick += Timer_Tick;
+
+            _clickDispatcher = clickDispatcher;
         }
-        public void GameTimeEvent(Object source, ElapsedEventArgs e)//ивент для GameTime()
+
+        private void Timer_Tick(object? sender, EventArgs e)
         {
-            sec += 1;
-            if (sec == 60)
-            {
-                min += 1;
-                sec = 0;
-            }
-            if (min == 60)
-            {
-                min = 0;
-                hour += 1;
-            }
+            _clickDispatcher.TimerTick();
         }
+
+        public void Start() => timer.Start();
+
+        public void Pause() => timer.Stop();
     }
 }

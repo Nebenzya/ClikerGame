@@ -1,21 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using ClikerGame.Data;
+using ClikerGame.Logic;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ClikerGame.Data;
-using ClikerGame.Logic;
-using System.Windows.Media.Animation;
 
 namespace ClikerGame
 {
@@ -24,42 +11,65 @@ namespace ClikerGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ClickDispatcher clickDispatcher;
-        private TimerDispatcher timerDispatcher;
+        private readonly ClickDispatcher _clickDispatcher;
+        private readonly TimerDispatcher _timerDispatcher;
+        private readonly SoundDispatcher _soundDispatcher;
+        private readonly IUserController db;
+        private User user;
         private List<ButtonShop> buttonShops;
-        private SoundDispatcher soundDispatcher;
-            public MainWindow()
-            {
-                  InitializeComponent();
 
-            ButtonShop button1 = new ButtonShop();
-            ButtonShop button2 = new ButtonShop();
-            ButtonShop button3 = new ButtonShop();
-            ButtonShop button4 = new ButtonShop();
-            ButtonShop button5 = new ButtonShop();
-            ButtonShop button6 = new ButtonShop();
-            ButtonShop button7 = new ButtonShop();
-            ButtonShop button8 = new ButtonShop();
-            shopStack.Children.Add(button1);
-            shopStack.Children.Add(button2);
-            shopStack.Children.Add(button3);
-            shopStack.Children.Add(button4);
-            shopStack.Children.Add(button5);
-            shopStack.Children.Add(button6);
-            shopStack.Children.Add(button7);
-            shopStack.Children.Add(button8);
-
-            clickDispatcher = new();
-                var a = clickDispatcher.clickСounter;
-            soundDispatcher = new SoundDispatcher();
-            }
-        
-        private void cookie_Click(object sender, RoutedEventArgs e)
+        public MainWindow()
         {
-            clickDispatcher.ClickСookie();
-            cookie_counter.Content = clickDispatcher.clickСounter.ToString();
-            soundDispatcher.CookieSound();
-            
+            InitializeComponent();
+            _clickDispatcher = new ClickDispatcher();
+            _clickDispatcher.ScoreChange += (s) =>
+            {
+                tbCounter.Text = s;
+                var val = long.Parse(tbCounter.Text);
+                if (buttonShops != null && buttonShops.Count > 0)
+                {
+                    foreach (var bs in buttonShops)
+                    {
+                        if (val > bs.Price)
+                            bs.IsEnabled = true;
+                        else
+                            bs.IsEnabled = false;
+                    }
+                }
+            };
+
+            _timerDispatcher = new TimerDispatcher(_clickDispatcher);
+            _soundDispatcher = new SoundDispatcher();
+            db= new UserController();
+
+            //var lb = db?.LeaderBoard(10).ToList();
+            var lb = new List<User>();
+
+            var sw = new StartWindow(lb);
+            sw.StartClick += (s) =>
+            {
+                user = new User() { Nickname = s };
+                startGrid.Visibility = Visibility.Collapsed;
+                _timerDispatcher.Start();
+            };
+            startGrid.Children.Add(sw);
+
+            var bs = new ButtonShop();
+            buttonShops= new List<ButtonShop>();
+            buttonShops.Add(bs);
+            bs.Click += Bs_Click;
+            shopStack.Children.Add(bs);
+        }
+
+        private void Bs_Click(ButtonShop obj)
+        {
+            _clickDispatcher.Shopping(obj);
+        }
+
+        private void Cookie_Click(object sender, RoutedEventArgs e)
+        {
+            _clickDispatcher.Click();
+            _soundDispatcher.CookieSound();
         }
     }
 }

@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClikerGame
 {
@@ -20,11 +9,24 @@ namespace ClikerGame
     /// </summary>
     public partial class ButtonShop : UserControl
     {
-        public int modif { get; }
-        public int cost { get; }
+        private long _count = 0, _price = 10;
+        public event Action<ButtonShop>? Click;
+        public long Price { get => _price; private set => _price = value; }
         public ButtonShop()
         {
             InitializeComponent();
+            lbPrice.Content = _price.ToString();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _count++;
+            lbCount.Content = _count.ToString();
+            Click?.Invoke(this);
+            _price *= 2;
+            lbPrice.Content = _price.ToString();
+        }
+
+
     }
 }

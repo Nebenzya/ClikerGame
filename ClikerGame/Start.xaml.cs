@@ -1,47 +1,31 @@
-﻿using ClikerGame.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static ClikerGame.Data.UserModel;
 
 namespace ClikerGame
 {
 
-    public partial class Start : UserControl
+    public partial class StartWindow : UserControl
     {
-        IUserController User = new UserController();
-        IUserController db = new UserController();
+        public Action<string>? StartClick;
 
-        public Start()
+        public StartWindow(List<Data.User>? users)
         {
             InitializeComponent();
-            LoginTextBox.Foreground = SystemColors.GrayTextBrush;
+            LoginTextBox.Foreground = Brushes.LightGray;
 
-            var users = db.LeaderBoard(10);
-            foreach (var user in users)
-            {
-                RatingTextBlock.Text += $"{user?.Nickname}: {user?.Score}\n";
-            }
+            if (users != null && users.Count > 0)
+                foreach (var user in users)
+                    RatingTextBlock.Text += $"{user?.Nickname}: {user?.Score}\n";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string login = LoginTextBox.Text;
-            var newUser = User.GetUser(login);
-
-            MainWindow mainW = new MainWindow();
-            mainW.Show();
+            StartClick?.Invoke(login);
         }
 
         private void nameTextBox_GotFocus(object sender, RoutedEventArgs e)

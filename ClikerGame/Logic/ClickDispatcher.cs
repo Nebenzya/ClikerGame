@@ -1,34 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ClikerGame.Logic
 {
     internal class ClickDispatcher
-    {
-        public long click = 1;//кол-во за нажатие
-        public long clickСounter = 0;//счетчик
-        public int[] priceModification = { 25, 25 };//цена покупки
+    { 
+        private long _score = default;
+        private long deltaClick = 1, deltaTick = 1;
 
-        public void ClickСookie() //счетчик кликов
-        {
-            clickСounter += click;
-        }
-        public void ModificationDoubleСlick() //умножение клика х2, [0]
-        {
-            if (clickСounter >= priceModification[0])
+        public Action<string>? ScoreChange;
+        public long ClickCount { get; private set; }
+        public long Score 
+        { 
+            get 
             {
-                click *= 2;
-                clickСounter -= priceModification[0];
-                priceModification[0] += priceModification[0];// подорожание покупки х2 клика, можно придумать формулу посложнее
-            }
+                return _score; 
+            } 
+            
+            private set 
+            {
+                _score = value;
+                ScoreChange?.Invoke(_score.ToString());
+            } 
         }
-        public void AutoClick()//авто клик каждое n-время, [1]
-        {
 
+
+        public void Click() //счетчик кликов
+        {
+            Score += deltaClick;
+            ClickCount++;
+        }
+
+        public void TimerTick()
+        {
+            Score += deltaTick;
+        }
+
+        public void Shopping(ButtonShop bs)
+        {
+            Score -= bs.Price;
+            deltaClick++;
         }
     }
 }
